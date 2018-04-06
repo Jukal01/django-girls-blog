@@ -16,7 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.contrib.auth import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('blog.urls')),
+    url(r'^accounts/login/$', views.login, name='login'),
+    url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page':'/'})
+    #url(r'^accounts/logout/$', views.logout, name='logout'),#either use this with redirect after logout being inside the settings or
+    #use this url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page':'/'}) where you dont have to write LOGIN_REDIRECT_URL in the settings.py file
 ]
